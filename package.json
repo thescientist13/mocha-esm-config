@@ -1,0 +1,18 @@
+{
+  "name": "mocha-esm-config",
+  "version": "1.0.0",
+  "description": "Development work to support enabling ESM configuration files for Mocha",
+  "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thescientist13/mocha-esm-config.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0"
+  }
+}
