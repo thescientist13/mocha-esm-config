@@ -250,7 +250,7 @@ index 977a341..c60e2f1 100755
    yargs()
      .scriptName('mocha')
 diff --git a/node_modules/mocha/lib/cli/config.js b/node_modules/mocha/lib/cli/config.js
-index ac71983..bb25f73 100644
+index ac71983..1997c67 100644
 --- a/node_modules/mocha/lib/cli/config.js
 +++ b/node_modules/mocha/lib/cli/config.js
 @@ -13,6 +13,7 @@ const debug = require('debug')('mocha:cli:config');
@@ -281,7 +281,7 @@ index ac71983..bb25f73 100644
  });
  
  /**
-@@ -60,10 +67,11 @@ const parsers = (exports.parsers = {
+@@ -60,17 +67,23 @@ const parsers = (exports.parsers = {
   * "JSON" files may have comments.
   *
   * @private
@@ -293,17 +293,21 @@ index ac71983..bb25f73 100644
 +exports.loadConfig = async filepath => {
    let config = {};
    debug('loadConfig: trying to parse config at %s', filepath);
- 
-@@ -73,6 +81,8 @@ exports.loadConfig = filepath => {
+-
++  // TODO do we need to check this exists first?
++  const packageJson = require(path.resolve(utils.cwd(), 'package.json'));
+   const ext = path.extname(filepath);
+   try {
+     if (ext === '.yml' || ext === '.yaml') {
        config = parsers.yaml(filepath);
-     } else if (ext === '.js' || ext === '.cjs') {
-       config = parsers.js(filepath);
 +    } else if (ext === '.mjs') {
 +      config = await parsers.esm(filepath);
++    } else if (ext === '.js' && packageJson.type === 'module') {
++      config = await parsers.esm(filepath);
+     } else if (ext === '.js' || ext === '.cjs') {
+       config = parsers.js(filepath);
      } else {
-       config = parsers.json(filepath);
-     }
-@@ -82,6 +92,8 @@ exports.loadConfig = filepath => {
+@@ -82,6 +95,8 @@ exports.loadConfig = filepath => {
        filepath
      );
    }
