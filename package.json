@@ -8,11 +8,12 @@
     "type": "git",
     "url": "git+https://github.com/thescientist13/mocha-esm-config.git"
   },
-  "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "patch-package": "^8.0.0"
   }
 }
