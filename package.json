@@ -9,7 +9,8 @@
     "url": "git+https://github.com/thescientist13/mocha-esm-config.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "mocha": "^11.7.1",
